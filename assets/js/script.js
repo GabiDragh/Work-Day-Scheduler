@@ -1,7 +1,8 @@
 //Target HTML files 
 var displayDate = document.querySelector('#currentDay');
 // var timeBlock = document.querySelector("#timeblock");
-var timeContainer = document.querySelector('.container');
+var plannerContainer = document.querySelector('.container');
+var hours = document.querySelector('#hourId');
 
 
 
@@ -15,9 +16,19 @@ function updateHeaderDate () {
 //Call function
 updateHeaderDate(); 
 
-//Create time blocks table
-// function createTimeBlocks() {
+//Create planner
 
+//  function createPlanner() {
+
+//    //Create time blocks table 
+//    //1. Create table div in HTML
+//    var table = $('<table>');
+//    //2. Add content - class to match css style
+//    table.addClass('time-block');
+//    //3. Append to container
+//    plannerContainer.append('table');
+// //    console.log(plannerContainer + 'Hello');
+$(document).ready(function(){
     var times = [
                 '9AM',
                 '10AM',
@@ -27,19 +38,25 @@ updateHeaderDate();
                 '14PM',
                 '15PM',
                 '16PM',
-                '17PM'
+                '17PM',
 ];
 
 for (var i = 0; i < times.length; i++) {
-    var hours = times[i];
-    console.log(hours);
-}
-//     //Create table section in html
-//     var timeTable = $('<table>');
-//     //Add content to match css file attributes
-//     timeTable.addClass('time-block row');
     
-//     append timetable
+    var hourSlot = hours.text(times[i]);
+    console.log(hourSlot);
+
+}
+})
+    // //Create table section in html
+    // var tableRow = $('<div>');
+    // //Add content to match css file attributes
+    // tableRow.addClass('row');
+    // tableRow.text(times[i]);
+    // //Append row to timetable
+    // $('.row').append(tableRow);
+    // console.log(tableRow);
+
 
 // create columns inside each row
 //assign each first column with an hour
@@ -47,7 +64,7 @@ for (var i = 0; i < times.length; i++) {
 //assign last column with save button and a hover effect. After button is pressed, data gets stored in local storage (create array var for that!!!)
 // }
 
-
+// createPlanner();
 
 
 

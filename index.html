@@ -32,8 +32,23 @@
     </header>
     <div class="container">
       <!-- Timeblocks go here -->
-      <div id="timeblock" class="time-block mt-3 mb-3">
-
+        <table class="time-block mt-3">
+          <thead>
+            <tr>
+              <th scope="col" class="col-md-2"></th>
+              <th scope="col" class="col-md-9"></th>
+              <th scope="col" class="col-md-1"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td scope="row" id="hourId" class="hour"></td>
+              <td><input class="form-control row" id="input" type="text"></td>
+              <td><input class="btn btn-primary saveBtn row">
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
