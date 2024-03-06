@@ -13,17 +13,17 @@ $(document).ready(function () {
 
   function dailyPlanner() {
 
-      //Define variable to store the time slots
-      var timeslots = [
-      "9AM",
-      "10AM",
-      "11AM",
-      "12AM",
-      "1PM",
-      "2PM",
-      "3PM",
-      "4PM",
-      "5PM",
+    //Define variable to store the time slots
+    var timeslots = [
+      "9:00",
+      "10:00",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00",
     ];
 
     // Target the container where the time slots will append to
@@ -47,11 +47,41 @@ $(document).ready(function () {
     // Call the function that remembers the text after page refresh
     callInput(); 
 
-    // TODO:Function to update time block - past, present, future
+    // DONE: Function to update time block - past, present, future
     function updateTimeblocks() {
-        // Define current hour variable
-        var currentHour = dayjs().hour();
-        console.log(currentHour);
+
+      // Define current hour variable
+      var currentHour = dayjs().hour();
+      console.log(currentHour);
+
+      // Assign classes to each time slot
+      $(".time-block").each(function () {
+
+        // Select the hour text in the time slot
+        var hour = $(this).find(".hour").text();
+
+        // // If the hour is PM, add 12 hours to it - can't figure it out, I have changed the time slots format in the timeslots array
+        // if (hour.includes("PM") && hour < 12) {
+        //   hour += 12;
+        // } else {
+        //   console.log(hour);
+        // }
+        
+        // Variable to parse the hour as integer
+        var slotHour = parseInt(hour.match(/\d+/)[0], 10);
+        console.log(slotHour);
+
+        // If else statement to assign slots past, present, future class
+        if (slotHour < currentHour) {
+          row.addClass("past");
+        } else if (slotHour === currentHour) {
+          row.addClass("present");
+        } else {
+          row.addClass("future");
+        }
+
+        console.log("What time slot?");
+      })
     }
 
     updateTimeblocks();
@@ -80,11 +110,11 @@ $(document).ready(function () {
 
     });
 
-     // DONE: Add a clear button next to save button to clear input text
+    // DONE: Add a clear button next to save button to clear input text
 
     $(".clearBtn").on("click", function (event) {
       event.preventDefault();
-      console.log("I am pressing the button"); //check if the button is working
+      console.log("I am pressing the clear button"); //check if the button is working
 
       // Identify parent row to use as index in the array when deleting the input data
       var index = $(this).parent().index(); 
@@ -102,7 +132,6 @@ $(document).ready(function () {
       $(this).siblings(".event-input").val(""); 
   
     });
-
 
     // DONE: Function to call when page refreshes displaying the input text
 
