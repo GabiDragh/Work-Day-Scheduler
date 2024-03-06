@@ -45,26 +45,41 @@ $(document).ready(function () {
       
     }
 
-    // Function to store input in local storage
-    function storeInput() {
+    // // TODO:Function to store input in local storage
+    // function storeInput(hour, eventText) {
+    //     localStorage.setItem(hour, eventText);
+    //     console.log(eventText);
+    // }
 
-    }
-
-    // Function to update time block - past, present, future
+    // TODO:Function to update time block - past, present, future
     function updateTimeblocks() {
 
     }
 
-    // Function to handle event - save button
+    // TODO:Function to handle event - save button
 
-    function handleSaveButton (event) {
+    $(".saveBtn").on("click", function (event) {
+      event.preventDefault();
+      // Define variable to store text input for each similar fields 
+      var inputText = $(this).siblings(".event-input").val().trim();
+
+      // Define an array variable that gets the information existent in local storage. If nothing exists, create an empty array.
+      var storedInputText = JSON.parse(localStorage.getItem("inputTexts")) || [];
+
+      // Push the existing text into the array
+      storedInputText.push(inputText);
       
-    }
+      // Store input text in local storage
+      localStorage.setItem("inputTexts", JSON.stringify(storedInputText));
+
+    });
     
+    // storeInput();
 
   }
 
   //Call functions
   updateHeaderDate();
   dailyPlanner();
+
 });
