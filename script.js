@@ -1,6 +1,6 @@
 $(document).ready(function () {
     
-  //Function to display the date at the top of the planner, under the planner description
+  //DONE: Function to display the date at the top of the planner, under the planner description
   function updateHeaderDate() {
     //Day.js used to format the current date
     var headerDate = dayjs().format("dddd, MMMM D YYYY");
@@ -45,18 +45,14 @@ $(document).ready(function () {
       
     }
 
-    // // TODO:Function to store input in local storage
-    // function storeInput(hour, eventText) {
-    //     localStorage.setItem(hour, eventText);
-    //     console.log(eventText);
-    // }
+    callInput();
 
     // TODO:Function to update time block - past, present, future
     function updateTimeblocks() {
 
     }
 
-    // TODO:Function to handle event - save button
+    // DONE: Function to handle event - save button
 
     $(".saveBtn").on("click", function (event) {
       event.preventDefault();
@@ -68,13 +64,23 @@ $(document).ready(function () {
 
       // Push the existing text into the array
       storedInputText.push(inputText);
-      
+
       // Store input text in local storage
       localStorage.setItem("inputTexts", JSON.stringify(storedInputText));
 
     });
+
+    // DONE: Function to call when page refreshes displaying the input text
+
+    function callInput() {
+      var storedInputText = JSON.parse(localStorage.getItem("inputTexts")) || [];
+
+      $(".event-input").each(function (index) {
+        $(this).val(storedInputText[index] || "");
+      });
+    }
     
-    // storeInput();
+   
 
   }
 
