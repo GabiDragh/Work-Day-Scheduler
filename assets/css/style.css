@@ -26,6 +26,11 @@ header {
   white-space: pre-wrap;
 }
 
+.container {
+  margin-top: 10px;
+  background-image: url();
+}
+
 .time-block {
   text-align: center;
   border-radius: 15px;
@@ -33,7 +38,7 @@ header {
 
 .row {
   white-space: pre-wrap;
-  height: 80px;
+  height: 60px;
   border-top: 1px solid white;
 }
 
@@ -55,18 +60,32 @@ header {
 
 .future {
   background-color: #77dd77;
-  color: white;
+  color: lightyellow;
 }
 
 .saveBtn {
-  border-left: 1px solid black;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-  background-color: #06aed5;
-  color: white;
+  border-left: 1px black;
+  background-color: green;
+  color: lightyellow;
 }
 
 .saveBtn i:hover {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
 }
+
+.clearBtn {
+  border-left: 1px solid black;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background-color: red;
+  color: whitesmoke;
+}
+
+.saveBtn i:hover {
+  font-size: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+
+
