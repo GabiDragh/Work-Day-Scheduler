@@ -49,8 +49,12 @@ $(document).ready(function () {
 
     // TODO:Function to update time block - past, present, future
     function updateTimeblocks() {
-
+        // Define current hour variable
+        var currentHour = dayjs().hour();
+        console.log(currentHour);
     }
+
+    updateTimeblocks();
 
     // DONE: Function to handle event - save button
 
