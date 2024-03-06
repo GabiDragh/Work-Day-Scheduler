@@ -42,10 +42,9 @@ $(document).ready(function () {
       // Append elements to each row and all rows to the container
       row.append(hourDiv, textDiv, saveBtn);
       container.append(row);
-      
     }
-
-    callInput();
+    // Call the function that remembers the text after page refresh
+    callInput(); 
 
     // TODO:Function to update time block - past, present, future
     function updateTimeblocks() {
@@ -58,7 +57,7 @@ $(document).ready(function () {
       event.preventDefault();
       // Define variable to store text input for each similar fields 
       var inputText = $(this).siblings(".event-input").val().trim();
-
+      console.log(inputText)
       // Define an array variable that gets the information existent in local storage. If nothing exists, create an empty array.
       var storedInputText = JSON.parse(localStorage.getItem("inputTexts")) || [];
 
@@ -80,10 +79,10 @@ $(document).ready(function () {
       });
     }
     
-   
-
   }
+  // TODO: Add a clear button next to save button to clear input text
 
+  
   //Call functions
   updateHeaderDate();
   dailyPlanner();
