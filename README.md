@@ -27,15 +27,15 @@ A clear button was added as an extra feature, that allows the user to clear the 
 
 The css started code was slightly modified to accomodate for the Clear button feature. 
 
-### References
+## References
 
 Day.js formatting: https://day.js.org/docs/en/display/format
 
-#### Links for application
+## Links for application
 
 Link to the deployed application https://gabidragh.github.io/Work-Day-Scheduler/
 
-Screenshot of the application ![Application Screenshot](C:\Users\dragh\Bootcamp\Work-Day-Scheduler\screencapture-127-0-0-1-5501-Work-Day-Scheduler-index-html-2024-03-07-00_05_57.png?raw=true "Application Screenshot")
+Screenshot of the application ![Application Screenshot](screencapture-127-0-0-1-5501-Work-Day-Scheduler-index-html-2024-03-07-00_05_57.png?raw=true "Application Screenshot")
 
 
 
