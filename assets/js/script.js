@@ -1,13 +1,6 @@
-//Target HTML files
-// var displayDate = document.querySelector('#currentDay');
-// // var timeBlock = document.querySelector("#timeblock");
-// var plannerContainer = document.querySelector('.container');
-// var hours = document.querySelector('#hourId');
-// var rowBlock = document.querySelector('.row-block');
-// var tableBody = document.querySelector('.table-body');
-
 $(document).ready(function () {
-  //Function to display the date at the top of the planner, under the planner description
+    
+  //DONE: Function to display the date at the top of the planner, under the planner description
   function updateHeaderDate() {
     //Day.js used to format the current date
     var headerDate = dayjs().format("dddd, MMMM D YYYY");
@@ -15,150 +8,145 @@ $(document).ready(function () {
     //Display the date in the html element
     $("#currentDay").text(headerDate);
   }
-  //Call function
-  updateHeaderDate();
+  
+  // Function for daily planner elements
 
-  //Create planner
+  function dailyPlanner() {
 
-  //  function createPlanner() {
+    //Define variable to store the time slots
+    var timeslots = [
+      "9:00",
+      "10:00",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00",
+    ];
 
-  // for (var i = 1; i <= 9; i++) {
-  //     var rows = [i];
-  //     console.log(i);
-  //     rows.addClass('row-block');
-  //     rows.text([i]);
-  //     console.log(rows);
-  // tableBody.append(rows);
+    // Target the container where the time slots will append to
+    var container = $(`.container`);
 
-  // }
-  //    //Create time blocks table
-  //    //1. Create table div in HTML
-  //    var table = $('<table>');
-  //    //2. Add content - class to match css style
-  //    table.addClass('time-block');
-  //    //3. Append to container
-  //    plannerContainer.append('table');
-  // //    console.log(plannerContainer + 'Hello');
-  // $(document).ready(function(){
-  //     var times = [
-  //                 '9AM',
-  //                 '10AM',
-  //                 '11AM',
-  //                 '12AM',
-  //                 '13PM',
-  //                 '14PM',
-  //                 '15PM',
-  //                 '16PM',
-  //                 '17PM',
-  // ];
+    // Loop through the array to assign each time slot
+    for (i = 0; i < timeslots.length; i++) {
+      var hour = timeslots[i];
 
-  // for (var i = 0; i < times.length; i++) {
+      // Create, add properties to each element - hour, text input area and save button
+      var row = $(`<div>`).addClass(`time-block row`);
+      var hourDiv = $(`<div>`).addClass(`hour col-1`).text(hour);
+      var textDiv = $(`<textarea>`).addClass(`textarea event-input col-9`);
+      var saveBtn = $(`<button>`).addClass(`saveBtn col-1`).text('Save');
+      var clearBtn = $('<button>').addClass('clearBtn col-1').text('Clear');
 
-  //     var hourSlot = $('div');
-  //     hourSlot.addClass('hour');
-  //     hourSlot.attr('data-hour', times[i]);
-  //     hourSlot.text(times[i]);
-  //     console.log(hourSlot);
-  //     hours.append(hourSlot);
-  //     console.log(hourSlot);
+      // Append elements to each row and all rows to the container
+      row.append(hourDiv, textDiv, saveBtn, clearBtn);
+      container.append(row);
+    }
+    // Call the function that remembers the text after page refresh
+    callInput(); 
 
-  // }
-  // })
-  // //Create table section in html
-  // var tableRow = $('<div>');
-  // //Add content to match css file attributes
-  // tableRow.addClass('row');
-  // tableRow.text(times[i]);
-  // //Append row to timetable
-  // $('.row').append(tableRow);
-  // console.log(tableRow);
+    // DONE: Function to update time block - past, present, future
+    function updateTimeblocks() {
 
-  // create columns inside each row
-  //assign each first column with an hour
-  //assign each second column with day.js formatting for time passing and form for text input
-  //assign last column with save button and a hover effect. After button is pressed, data gets stored in local storage (create array var for that!!!)
-  // }
-    function timeSlots() {
-      // createPlanner();
-      var times = [
-        "9AM",
-        "10AM",
-        "11AM",
-        "12AM",
-        "13PM",
-        "14PM",
-        "15PM",
-        "16PM",
-        "17PM",
-      ];
+      // Define current hour variable
+      var currentHour = dayjs().hour();
+      console.log(currentHour);
 
-      for (i = 0; i < times.length; i++) {
-        var eachRow = times[i];
-        console.log(eachRow);
+      // Assign classes to each time slot
+      $(".time-block").each(function () {
 
-        //1 Create table elements
-        var newRow = $("<tr>");
-        var hourSlot = $("<td>");
-        var timeBlocks = $("<td>");
-        var saveButtonSlot = $("<td>");
+        // Select the hour text in the time slot
+        var hour = $(this).find(".hour").text();
 
-        // newRow.addClass("row");
+        // // If the hour is PM, add 12 hours to it - can't figure it out, I have changed the time slots format in the timeslots array
+        // if (hour.includes("PM") && hour < 12) {
+        //   hour += 12;
+        // } else {
+        //   console.log(hour);
+        // }
+        
+        // Variable to parse the hour as integer
+        var slotHour = parseInt(hour.match(/\d+/)[0], 10);
+        console.log(slotHour);
 
-        hourSlot.addClass("time-block row hour");
-        hourSlot.attr("data-time");
-        hourSlot.text(eachRow);
+        // If else statement to assign slots past, present, future class
+        if (slotHour < currentHour) {
+          $(this).addClass("past");
+        } else if (slotHour === currentHour) {
+          $(this).addClass("present");
+        } else {
+          $(this).addClass("future");
+        }
 
-        timeBlocks.addClass("time-block row");
-
-        var plannedInput = $("<input>");
-        plannedInput.addClass("form-control");
-        var saveButton = $("<button>");
-        saveButton.addClass("time-block row saveBtn");
-
-        saveButtonSlot.append(saveButton);
-        timeBlocks.append(plannedInput);
-        newRow.append(hourSlot, timeBlocks, saveButtonSlot);
-        $("tbody").append(newRow);
-      }
-      timeblockView();
-      saveProject();
+        console.log("What time slot?");
+      })
     }
 
-    timeSlots();
+    updateTimeblocks();
 
-  //create planned activity
+    // DONE: Function to handle event - save button
 
-  //variable = time
-  //if statement - present, past, future
-  function timeblockView() {
-     var timeBlocks = $(".row");
-     var currentTime = dayjs().format("HHA");
-     console.log(currentTime);
-     timeBlocks.attr("data-hour", currentTime);
-    // timeBlocks.each(function (idex, elem) {
-    //     console.log({idex, elem});
-    //     var elemHour = Number.parseInt($(this).attr("data-hour"));
-    //     console.log(this);
-    //     console.log(elemHour);
+    $(".saveBtn").on("click", function (event) {
+      event.preventDefault();
+      console.log("I am pressing the save button");
 
-      var elemHour = Number.parseInt($(eachRow).attr("data-time"));
-     console.log(elemHour);
+      // Define variable to store text input for each similar fields 
+      var inputText = $(this).siblings(".event-input").val().trim();
+
+      // Identify parent row to use as index in the array when saving the input data
+      var index = $(this).parent().index();
+      console.log(inputText)
+
+      // Define an array variable that gets the information existent in local storage. If nothing exists, create an empty array.
+      var storedInputText = JSON.parse(localStorage.getItem("inputTexts")) || [];
+
+      // Assign input to the time slot
+      storedInputText[index] = inputText;
+
+      // Store input text in local storage
+      localStorage.setItem("inputTexts", JSON.stringify(storedInputText));
+
+    });
+
+    // DONE: Add a clear button next to save button to clear input text
+
+    $(".clearBtn").on("click", function (event) {
+      event.preventDefault();
+      console.log("I am pressing the clear button"); //check if the button is working
+
+      // Identify parent row to use as index in the array when deleting the input data
+      var index = $(this).parent().index(); 
+
+      //Get the stored array from local storage
+      var storedInputText = JSON.parse(localStorage.getItem("inputTexts")) || [];  
+
+      //Empty the value for current item in array
+      storedInputText[index] = "";
+      
+      //Reset the array in local storage
+      localStorage.setItem("inputTexts", JSON.stringify(storedInputText)); 
+
+      //Clear the input field
+      $(this).siblings(".event-input").val(""); 
   
-     if (currentTime.hour() > elemHour) { //comparing apples with apples|!!!
-        timeBlocks.addClass("past");
-      } else if (currentTime.hour() == elemHour) {
-        timeBlocks.addClass("present");
-      } else {
-        timeBlocks.addClass("future");
-      }
-    };
+    });
 
-    timeblockView();
+    // DONE: Function to call when page refreshes displaying the input text
 
-  });
+    function callInput() {
+      var storedInputText = JSON.parse(localStorage.getItem("inputTexts")) || [];
 
+      $(".event-input").each(function (index) {
+        $(this).val(storedInputText[index] || "");
+      });
+    }
+    
+  }
 
+  //Call functions
+  updateHeaderDate();
+  dailyPlanner();
 
-
-
-
+});
